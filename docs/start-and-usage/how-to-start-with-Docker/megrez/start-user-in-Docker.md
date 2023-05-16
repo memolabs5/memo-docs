@@ -102,7 +102,7 @@ wallet default: Get the default wallet address
 
 Please post tweet and send email to complete the registration.
 
-1. Please post the tweet using your personal Twitter account and**@**[MemoLabs](https://twitter.com/Memo_Labs).
+1. Please post the tweet using your personal Twitter account and @MemoLabsOrg [MemoLabs](https://twitter.com/MemoLabsOrg).
 
 Twittercontent：
 
@@ -130,18 +130,18 @@ The wallet address is the wallet address generated in the previous step.
 
 ### Step 7: Modify the configuration file
 
-Here are configurations for testnet.
+Here are configurations for megrez.
 
 ```shell
 docker run --rm -v $MEFS_PATH:/root --entrypoint mefs-user memoio/mefs-user:latest config set --key=contract.version --value=3
 ```
 
 ```shell
-docker run --rm -v $MEFS_PATH:/root --entrypoint mefs-user memoio/mefs-user:latest config set --key=contract.endPoint --value="https://testchain.metamemo.one:24180"
+docker run --rm -v $MEFS_PATH:/root --entrypoint mefs-user memoio/mefs-user:latest config set --key=contract.endPoint --value="https://chain.metamemo.one:8501"
 ```
 
 ```shell
-docker run --rm -v $MEFS_PATH:/root --entrypoint mefs-user memoio/mefs-user:latest config set --key=contract.roleContract --value="0xdfe29F0aa6785acE9b776ADA0c80361595816a24"
+docker run --rm -v $MEFS_PATH:/root --entrypoint mefs-user memoio/mefs-user:latest config set --key=contract.roleContract --value="0xbd16029A7126C91ED42E9157dc7BADD2B3a81189"
 ```
 
 ```shell
@@ -149,15 +149,13 @@ docker run --rm -v $MEFS_PATH:/root --entrypoint mefs-user memoio/mefs-user:late
 ```
 
 ```shell
-docker run --rm -v $MEFS_PATH:/root --entrypoint mefs-user memoio/mefs-user:latest bootstrap add "/ip4/103.39.231.220/tcp/14008/p2p/12D3KooWA4wnzRUmtsvP1ybbpWKHWeYHxZLRp7x1oVNtuUuUXWFd"
+docker run --rm -v $MEFS_PATH:/root --entrypoint mefs-user memoio/mefs-user:latest bootstrap add "/ip4/1.182.90.4/tcp/27360/p2p/12D3KooWFhw59q71vpM8LpRTZ4NJmteXLys2pryHAStxG4Mb3wrn"
 ```
-
-&nbsp; 
 
 ### Step 8:Start node
 
 ```shell
-docker run -d -v $MEFS_PATH:/root -v $MEFS_DATA:/root/data -e PASSWORD="memoriae" -e PRICE=250000 -e MEFS_PATH=/root/.memo-user -e GROUP=2 -e SWARM_PORT=4001 -e DATA_PATH=/root/data --name mefs-user -e GATEWAY=true -e GATEWAY_USERNAME=admin -e GATEWAY_PASSWORD=memoriae -p 8080:8080 memoio/mefs-user:latest
+docker run -d -v $MEFS_PATH:/root -v $MEFS_DATA:/root/data -e PASSWORD="memoriae" -e PRICE=250000 -e MEFS_PATH=/root/.memo-user -e GROUP=3 -e SWARM_PORT=4001 -e DATA_PATH=/root/data --name mefs-user -e GATEWAY=true -e GATEWAY_USERNAME=admin -e GATEWAY_PASSWORD=memoriae -p 8080:8080 memoio/mefs-user:latest
 ```
 
 - Default in web, account: admin; password: memoriae.

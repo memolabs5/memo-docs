@@ -20,7 +20,7 @@ https://github.com/memoio/testnet
 
 ### Twitter
 
-https://twitter.com/Memo_Labs
+https://twitter.com/MemoLabsOrg
 
 &nbsp;
 

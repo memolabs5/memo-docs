@@ -96,7 +96,7 @@ wallet default: Get the default wallet address
 
 Please post tweet and send email to complete the registration.
 
-1. Please post the tweet using your personal Twitter account and**@**[MemoLabs](https://twitter.com/Memo_Labs).
+1. Please post the tweet using your personal Twitter account and @MemoLabsOrg [MemoLabs](https://twitter.com/MemoLabsOrg).
 
 Twittercontent：
 
