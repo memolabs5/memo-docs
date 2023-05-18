@@ -65,6 +65,6 @@ Our [GITHUB](https://github.com/memoio/testnet/issues) URL is:
 
 https://github.com/memoio/testnet/issues
 
-Our [TWITTER URL](https://twitter.com/MemoLabsOrg) is:
+Our [TWITTER URL](https://twitter.com/Memo_Labs) is:
 
-https://twitter.com/MemoLabsOrg
+https://twitter.com/Memo_Labs

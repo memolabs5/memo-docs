@@ -76,13 +76,13 @@ As you complete wallet charging, double click "install.exe" to install user node
 
 ​![step6](./step6.png)
 
-![step](./step6.1.png)
+![step6.1](./step6.1.png)
 
-​![step](./step6.2.png)
+​![step6.2](./step6.2.png)
 
-![step](./step6.3.png)
+![step6.3](./step6.3.png)
 
-![step](./step6.4.png)
+![step6.4](./step6.4.png)
 
 ​&nbsp;
 
@@ -91,8 +91,7 @@ As you complete wallet charging, double click "install.exe" to install user node
 When your installation completed, the content of installation folder is as follows, meanwhile there are 2 more icons appeared on your desktop.
 
 ​![step](./step7.png)
-
-<img src="step7.1.png" title="" alt="step" data-align="center">
+​![step](./step7.1.png)
 
 &nbsp;
 
@@ -102,7 +101,7 @@ Double click memo_start icon or the start.bat file in the installation folder, i
 
 ​![step](./step8.png)
 
-<img src="step8.1.png" title="" alt="8.1" data-align="center">
+​![step](./step8.1.png)
 
 ​&nbsp;
 
@@ -170,4 +169,4 @@ You can stop user node with following 2 methods. But this just closes node servi
 
 ![14](./step14.png)
 
-<img src="step14.1.png" title="" alt="14.1" data-align="center">
+![14.1](./step14.1.png)

@@ -1,5 +1,5 @@
 ---
-title: MEMO API
+title: Api docs
 icon: API
 index: false
 ---

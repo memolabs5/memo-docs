@@ -1,5 +1,5 @@
 ---
-title: MEMO API
+title: resources
 icon: API
-index: false
+index: true
 ---

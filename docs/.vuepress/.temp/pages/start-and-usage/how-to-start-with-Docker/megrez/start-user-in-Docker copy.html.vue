@@ -1,0 +1,194 @@
+<template><div><h1 id="start-user" tabindex="-1"><a class="header-anchor" href="#start-user" aria-hidden="true">#</a> Start User</h1>
+<h2 id="step-by-step" tabindex="-1"><a class="header-anchor" href="#step-by-step" aria-hidden="true">#</a> Step by step</h2>
+<h3 id="step-1-docker-environment-preparation" tabindex="-1"><a class="header-anchor" href="#step-1-docker-environment-preparation" aria-hidden="true">#</a> Step 1: Docker Environment Preparation</h3>
+<h4 id="for-linux" tabindex="-1"><a class="header-anchor" href="#for-linux" aria-hidden="true">#</a> For Linux</h4>
+<p>If you are using Linux OS, just install docker to continue.</p>
+<p><RouterLink to="/start-and-usage/how-to-start-with-Docker/megrez/docker-install.html">Install docker</RouterLink></p>
+<p>Confirm Docker is running after install.</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token function">service</span> <span class="token function">docker</span> start
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h4 id="for-windows" tabindex="-1"><a class="header-anchor" href="#for-windows" aria-hidden="true">#</a> For Windows</h4>
+<p>If you are using Windows OS, you should install docker first, then install wsl to emulate a linux OS.</p>
+<p>Install Docker in Windows
+Just download and install the docker application in Windows.</p>
+<p>Download link: <a href="https://www.docker.com/" target="_blank" rel="noopener noreferrer">https://www.docker.com/<ExternalLinkIcon/></a></p>
+<p>Install wsl</p>
+<p>Using ubuntu 20.04 as an example.
+Open the starting menu and run microsoft store.
+Search for wsl, click Ubuntu 20.04 in the results to install.</p>
+<p>Switch wsl1 to wsl2</p>
+<p>Right click the start memu and open powershell(administrator), run:</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>wsl --set-version Ubuntu-20.04 <span class="token number">2</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>Confirm the wsl version is switched to version 2</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>wsl <span class="token parameter variable">-l</span> <span class="token parameter variable">-v</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>Run Ubuntu 20.04 from start memu to enter an emulated Ubuntu 20.04 and continue.</p>
+<h3 id="step-2-set-up-the-node-directory" tabindex="-1"><a class="header-anchor" href="#step-2-set-up-the-node-directory" aria-hidden="true">#</a> Step 2: Set up the node directory</h3>
+<p>Node home directory:
+Using &quot;~/memo_user&quot; as an example:</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token builtin class-name">export</span> <span class="token assign-left variable">MEFS_PATH</span><span class="token operator">=~</span>/memo_user
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>Node data storage directory: ~/memo_user_data as an example:</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token builtin class-name">export</span> <span class="token assign-left variable">MEFS_DATA</span><span class="token operator">=~</span>/memo_user_data
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>The home directory contains config file and other files for running a node, the storage directory is where data is stored.</p>
+<h3 id="step-3-pull-image-user" tabindex="-1"><a class="header-anchor" href="#step-3-pull-image-user" aria-hidden="true">#</a> Step 3: Pull image(User)</h3>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token function">docker</span> pull memoio/mefs-user:latest
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3 id="step-4-initialization-create-new-wallet" tabindex="-1"><a class="header-anchor" href="#step-4-initialization-create-new-wallet" aria-hidden="true">#</a> Step 4: Initialization（Create new wallet）</h3>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token function">docker</span> run <span class="token parameter variable">--rm</span> <span class="token parameter variable">-v</span> <span class="token variable">$MEFS_PATH</span>:/root <span class="token parameter variable">--entrypoint</span> mefs-user memoio/mefs-user:latest init <span class="token parameter variable">--password</span><span class="token operator">=</span>memoriae
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>Explanation of parameters:</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>--password: Enter your user <span class="token function">node</span> password, the default is memoriae.
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>init: Execute the initialization command, which will generate your wallet address and generate a configuration file.</p>
+<p> </p>
+<h3 id="step-5-get-wallet-address" tabindex="-1"><a class="header-anchor" href="#step-5-get-wallet-address" aria-hidden="true">#</a> Step 5: Get wallet address</h3>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token function">docker</span> run <span class="token parameter variable">--rm</span> <span class="token parameter variable">-v</span> <span class="token variable">$MEFS_PATH</span>:/root <span class="token parameter variable">--entrypoint</span> mefs-user memoio/mefs-user:latest wallet default
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>Explanation of parameters:</p>
+<p>wallet default: Get the default wallet address</p>
+<p> </p>
+<h3 id="step-6-top-up" tabindex="-1"><a class="header-anchor" href="#step-6-top-up" aria-hidden="true">#</a> Step 6: Top up</h3>
+<p>Please post tweet and send email to complete the registration.</p>
+<ol>
+<li>Please post the tweet using your personal Twitter account and**@**<a href="https://twitter.com/Memo_Labs" target="_blank" rel="noopener noreferrer">MemoLabs<ExternalLinkIcon/></a>.</li>
+</ol>
+<p>Twittercontent：</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>I have joined the MEMO testnet.
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><ol start="2">
+<li>Please send an email to <a href="mailto:sup@memolabs.org">sup@memolabs.org</a> to apply for provider registration, also attach the link to Tweet.</li>
+</ol>
+<p>Email Example</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>Network: <span class="token builtin class-name">test</span> net
+Wallet Address: 0x70955480f225b23f60c37c4B6e88C63E3ACD723
+Role: provider
+Twitter Link: 
+https://twitter.com/Geo***71090/status/1387**********01381?s<span class="token operator">=</span><span class="token number">20</span>*
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Note:</p>
+<p>The network must be confirmed before application, usually either test net or product net.</p>
+<p>The wallet address is the wallet address generated in the previous step.</p>
+<h3 id="step-7-modify-the-configuration-file" tabindex="-1"><a class="header-anchor" href="#step-7-modify-the-configuration-file" aria-hidden="true">#</a> Step 7: Modify the configuration file</h3>
+<p>Here are configurations for megrez.</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token function">docker</span> run <span class="token parameter variable">--rm</span> <span class="token parameter variable">-v</span> <span class="token variable">$MEFS_PATH</span>:/root <span class="token parameter variable">--entrypoint</span> mefs-user memoio/mefs-user:latest config <span class="token builtin class-name">set</span> <span class="token parameter variable">--key</span><span class="token operator">=</span>contract.version <span class="token parameter variable">--value</span><span class="token operator">=</span><span class="token number">3</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token function">docker</span> run <span class="token parameter variable">--rm</span> <span class="token parameter variable">-v</span> <span class="token variable">$MEFS_PATH</span>:/root <span class="token parameter variable">--entrypoint</span> mefs-user memoio/mefs-user:latest config <span class="token builtin class-name">set</span> <span class="token parameter variable">--key</span><span class="token operator">=</span>contract.endPoint <span class="token parameter variable">--value</span><span class="token operator">=</span><span class="token string">"https://chain.metamemo.one:8501"</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token function">docker</span> run <span class="token parameter variable">--rm</span> <span class="token parameter variable">-v</span> <span class="token variable">$MEFS_PATH</span>:/root <span class="token parameter variable">--entrypoint</span> mefs-user memoio/mefs-user:latest config <span class="token builtin class-name">set</span> <span class="token parameter variable">--key</span><span class="token operator">=</span>contract.roleContract <span class="token parameter variable">--value</span><span class="token operator">=</span><span class="token string">"0xbd16029A7126C91ED42E9157dc7BADD2B3a81189"</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token function">docker</span> run <span class="token parameter variable">--rm</span> <span class="token parameter variable">-v</span> <span class="token variable">$MEFS_PATH</span>:/root <span class="token parameter variable">--entrypoint</span> mefs-user memoio/mefs-user:latest bootstrap <span class="token function">clear</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token function">docker</span> run <span class="token parameter variable">--rm</span> <span class="token parameter variable">-v</span> <span class="token variable">$MEFS_PATH</span>:/root <span class="token parameter variable">--entrypoint</span> mefs-user memoio/mefs-user:latest bootstrap <span class="token function">add</span> <span class="token string">"/ip4/1.182.90.4/tcp/27360/p2p/12D3KooWFhw59q71vpM8LpRTZ4NJmteXLys2pryHAStxG4Mb3wrn"</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3 id="step-8-start-node" tabindex="-1"><a class="header-anchor" href="#step-8-start-node" aria-hidden="true">#</a> Step 8:Start node</h3>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">-v</span> <span class="token variable">$MEFS_PATH</span>:/root <span class="token parameter variable">-v</span> <span class="token variable">$MEFS_DATA</span>:/root/data <span class="token parameter variable">-e</span> <span class="token assign-left variable">PASSWORD</span><span class="token operator">=</span><span class="token string">"memoriae"</span> <span class="token parameter variable">-e</span> <span class="token assign-left variable">PRICE</span><span class="token operator">=</span><span class="token number">250000</span> <span class="token parameter variable">-e</span> <span class="token assign-left variable">MEFS_PATH</span><span class="token operator">=</span>/root/.memo-user <span class="token parameter variable">-e</span> <span class="token assign-left variable">GROUP</span><span class="token operator">=</span><span class="token number">3</span> <span class="token parameter variable">-e</span> <span class="token assign-left variable">SWARM_PORT</span><span class="token operator">=</span><span class="token number">4001</span> <span class="token parameter variable">-e</span> <span class="token assign-left variable">DATA_PATH</span><span class="token operator">=</span>/root/data <span class="token parameter variable">--name</span> mefs-user <span class="token parameter variable">-e</span> <span class="token assign-left variable">GATEWAY</span><span class="token operator">=</span>true <span class="token parameter variable">-e</span> <span class="token assign-left variable">GATEWAY_USERNAME</span><span class="token operator">=</span>admin <span class="token parameter variable">-e</span> <span class="token assign-left variable">GATEWAY_PASSWORD</span><span class="token operator">=</span>memoriae <span class="token parameter variable">-p</span> <span class="token number">8080</span>:8080 memoio/mefs-user:latest
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><ul>
+<li>
+<p>Default in web, account: admin; password: memoriae.</p>
+</li>
+<li>
+<p>Please make sure your user home directory and password are the same as in the previous step.</p>
+</li>
+</ul>
+<p>If you have any technical problems, please join our Discord server for help. <a href="https://discord.gg/YXQQwPhMpq" target="_blank" rel="noopener noreferrer">Memo Labs<ExternalLinkIcon/></a></p>
+<p> </p>
+<h2 id="checking-the-running-status" tabindex="-1"><a class="header-anchor" href="#checking-the-running-status" aria-hidden="true">#</a> Checking the running status</h2>
+<h3 id="step-1-enter-the-container" tabindex="-1"><a class="header-anchor" href="#step-1-enter-the-container" aria-hidden="true">#</a> Step 1: Enter the container</h3>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token function">docker</span> <span class="token builtin class-name">exec</span> <span class="token parameter variable">-it</span> mefs-user <span class="token function">bash</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><ul>
+<li>After entering the container, you can use the mefs-user command to perform operations.</li>
+</ul>
+<h3 id="step-2-check-user-information" tabindex="-1"><a class="header-anchor" href="#step-2-check-user-information" aria-hidden="true">#</a> Step 2: Check user information</h3>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-user info
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>----------- Information -----------
+
+<span class="token number">2022</span>-03-23 <span class="token number">10</span>:42:36 CST <span class="token comment">#Current time</span>
+
+<span class="token number">2.1</span>.0-alpha+git.e759ff0+2022-03-22.15:51:16CST <span class="token comment">#mefs-user version information</span>
+
+----------- Network Information ----------- <span class="token comment">#network information</span>
+
+ID: 12D3KooWBpPPzk9srHVVU4kkVF1RPJi9nYNgV4e6Yjjd4PGr5qrk <span class="token comment">#network id</span>
+
+IP: <span class="token punctuation">[</span>/ip4/10.xx.xx.xx/tcp/18003<span class="token punctuation">]</span> <span class="token comment">#Current node network information, 18003 is the swarm-port port, used for node communication</span>
+
+Type: Private
+
+----------- Sync Information -----------
+
+Status: true, Slot: <span class="token number">322885</span>, Time: <span class="token number">2022</span>-03-23 <span class="token number">10</span>:42:30 CST <span class="token comment">#Please check if your sync status is true, if it is false, please check your node network</span>
+
+Height Synced: <span class="token number">2640</span>, Remote: <span class="token number">2640</span> <span class="token comment">#sync status</span>
+
+Challenge Epoch: <span class="token number">21</span> <span class="token number">2022</span>-03-23 09:55:30 CST
+
+----------- Role Information -----------
+
+ID: <span class="token number">29</span>
+
+Type: User
+
+Wallet: 0xD2EC305EA80C6FCEF315029A806f52F27f3fB29a <span class="token comment">#Wallet address</span>
+
+Balance: <span class="token number">998.25</span> Gwei <span class="token punctuation">(</span>tx fee<span class="token punctuation">)</span>, <span class="token number">998815392.06</span> NanoMemo <span class="token punctuation">(</span>Erc20<span class="token punctuation">)</span>, <span class="token number">148075.99</span> NanoMemo <span class="token punctuation">(</span>in fs<span class="token punctuation">)</span> <span class="token comment">#balance</span>
+
+Data Stored: size <span class="token number">115294208</span> byte <span class="token punctuation">(</span><span class="token number">109.95</span> MiB<span class="token punctuation">)</span>, price <span class="token number">113500000</span>
+
+----------- Group Information -----------
+
+EndPoint: http://119.xx.xx.xx:8191
+
+Contract Address: 0xCa2C4103bd5679F43eC9E277C2bAf5598f94Fe6D
+
+Fs Address: 0xFB9FF16EB4093aa8fFf762F2dF4E61d3A7532Af9
+
+ID: <span class="token number">1</span> <span class="token comment">#group id</span>
+
+Security Level: <span class="token number">7</span>
+
+Size: <span class="token number">109.95</span> MiB
+
+Price: <span class="token number">113500000</span>
+
+Keepers: <span class="token number">10</span>, Providers: <span class="token number">16</span>, Users: <span class="token number">4</span> <span class="token comment">#The number of nodes in the current group</span>
+
+----------- Pledge Information ----------
+
+Pledge: <span class="token number">0</span> AttoMemo, <span class="token number">26.00</span> Memo <span class="token punctuation">(</span>total pledge<span class="token punctuation">)</span>, <span class="token number">26.00</span> Memo <span class="token punctuation">(</span>total <span class="token keyword">in</span> pool<span class="token punctuation">)</span> <span class="token comment">#current pledge information</span>
+
+----------- Lfs Information ----------
+
+Status: writable
+
+Buckets: <span class="token number">1</span>
+
+Used: <span class="token number">1.82</span> GiB
+
+Raw Size: <span class="token number">109.95</span> MiB
+
+Confirmed Size: <span class="token number">109.95</span> MiB
+
+OnChain Size: <span class="token number">109.95</span> MiB
+
+Need Pay: <span class="token number">987173.29</span> NanoMemo
+
+Paid: <span class="token number">987173.29</span> NanoMemo
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p> </p>
+<h2 id="check-net-status" tabindex="-1"><a class="header-anchor" href="#check-net-status" aria-hidden="true">#</a> Check net status</h2>
+<p><strong>Get local node network information</strong></p>
+<p>Command description: Enter command net info to view the network id (cid), ip address and port of the current node.</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-user net info
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>Network ID 12D3KooWBpPPzk9srHVVU4kkVF1RPJi9nYNgV4e6Yjjd4PGr5qrk, IP <span class="token punctuation">[</span>/ip4/10.xx.xx.xx/tcp/18003<span class="token punctuation">]</span>, Type: Private
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p><strong>Get the network connection information of the node</strong></p>
+<p>Command description: Enter command net peers to view the network connection information of the current node.</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-user net peers
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>12D3KooWMrZTqoU8febMxxxxxxxxxCeqLQy1XCU9QcjP1YWAXVi <span class="token punctuation">[</span>/ip4/10.xx.xx.xx/tcp/8003<span class="token punctuation">]</span>
+
+12D3KooWC2PmhSrU1VexxxxxxxxxtwvQuFZj3vPfjdfebAuJQtc <span class="token punctuation">[</span>/ip4/10.xx.xx.xx/tcp/8004<span class="token punctuation">]</span>
+
+12D3KooWR74K1v6naGxxxxxxxxxVS88h4X93bMnquoRiEDdLJTx <span class="token punctuation">[</span>/ip4/10.xx.xx.xx/tcp/8003<span class="token punctuation">]</span>
+
+12D3KooWSzzwJ7es1xxxxxxxxxPaqei3TUHnNZDmWTELSA7NJXQ <span class="token punctuation">[</span>/ip4/10.xx.xx.xx/tcp/18003<span class="token punctuation">]</span>
+
+12D3KooWG8PjbbN9xxxxxxxxx2oYFtjeQ8XnqvnEqfrB4AiW7eJ <span class="token punctuation">[</span>/ip4/10.xx.xx.xx/tcp/8003<span class="token punctuation">]</span>
+
+12D3KooWRjamwQtxxxxxxxxxb44AAXLNy9CB7u1FL2eC5QZekpF <span class="token punctuation">[</span>/ip4/1.xx.xx.xx/tcp/24071<span class="token punctuation">]</span>
+
+<span class="token punctuation">..</span>. 
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>Connect to any node</strong></p>
+<p>Command description: Enter command net connect to connect to any node; if there is any problem with your node network, please enter command net connect to connect to our public node.</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-user net connect /ip4/10.2.x.x/tcp/8004/p2p/12D3KooWAykMmqu951ziotQiAYTN6SwfvBd1dsejSSak2jdSwryF
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p> </p>
+<h2 id="restart-after-poweroff" tabindex="-1"><a class="header-anchor" href="#restart-after-poweroff" aria-hidden="true">#</a> Restart after poweroff</h2>
+<p>If the account has been started, and then the computer has been shutted down, Docker, or &quot;Windows PowerShell&quot; was been closed, if you need to restart MEMO again, you need to open Docker first, then run the command line &quot; docker start mefs-user&quot; to start.</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token function">docker</span> start mefs-user
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div></div></template>
+
+

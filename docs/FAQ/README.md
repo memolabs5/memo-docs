@@ -1,5 +1,5 @@
 ---
-title: MEMO API
+title: FAQ
 icon: API
 index: false
 ---

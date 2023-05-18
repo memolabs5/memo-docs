@@ -1,0 +1,505 @@
+<template><div><h1 id="commandline-mannual-for-prefaceprovider" tabindex="-1"><a class="header-anchor" href="#commandline-mannual-for-prefaceprovider" aria-hidden="true">#</a> CommandLine Mannual for Prefaceprovider</h1>
+<h2 id="_1-preface" tabindex="-1"><a class="header-anchor" href="#_1-preface" aria-hidden="true">#</a> 1 Preface</h2>
+<p>This article will introduce in detail the use of the command line function of the provider-Node of the MEMO system; the provider needs to download the binary and execute the program 'mefs-provider' to start a Memo provider-Node.</p>
+<p>Usage</p>
+<p>Use the following command to view all commands</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider <span class="token parameter variable">-h</span>
+
+COMMANDS:
+   init       Initialize a memoriae repo
+   daemon     Run a network-connected Memoriae node.
+   auth       Interact with auth
+   wallet     Interact with wallet
+   net        Interact with net
+   config     Interact with config
+   state      Interact with state manager
+   role       Interact with role manager
+   info       print information of this <span class="token function">node</span>
+   register   register an account <span class="token function">id</span> <span class="token keyword">for</span> the wallet first, <span class="token keyword">then</span> register a role <span class="token keyword">for</span> it, at last, <span class="token function">add</span> it into a group.
+   version    Print version
+   backup     backup <span class="token builtin class-name">export</span> or <span class="token function">import</span>
+   bootstrap  bootstrap
+   recover    recover
+   log        Manage logging
+   settle     Interact with settlement chain
+   order      Interact with order
+   restrict   Interact with restrict
+   transfer   transfer eth or memo
+   help, h    Shows a list of commands or <span class="token builtin class-name">help</span> <span class="token keyword">for</span> one <span class="token builtin class-name">command</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="_2-start-node-related-commands" tabindex="-1"><a class="header-anchor" href="#_2-start-node-related-commands" aria-hidden="true">#</a> 2 Start-node related commands</h2>
+<h3 id="_2-1-init" tabindex="-1"><a class="header-anchor" href="#_2-1-init" aria-hidden="true">#</a> 2.1 init</h3>
+<p>Introduction</p>
+<p>Used to create a wallet in the specified path. If the wallet information already exists in this path, the existing wallet will be used directly without recreating the wallet.
+Assign the MEFS_PATH environment virable to specify a path for this node.</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider init <span class="token parameter variable">-h</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>Options</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>   <span class="token parameter variable">--setPass</span>     <span class="token builtin class-name">set</span> password using input <span class="token punctuation">(</span>default: <span class="token boolean">false</span><span class="token punctuation">)</span>
+   <span class="token parameter variable">--password</span> value, <span class="token parameter variable">--pwd</span> value  <span class="token builtin class-name">set</span> password <span class="token keyword">for</span> access secret key <span class="token punctuation">(</span>default: <span class="token string">"memoriae"</span><span class="token punctuation">)</span>
+   <span class="token parameter variable">--secretKey</span> value, <span class="token parameter variable">--sk</span> value  secret key
+   <span class="token parameter variable">--keyfile</span> value, <span class="token parameter variable">--kf</span> value   absolute path of keyfile
+   <span class="token parameter variable">--kpw</span> value      password to decrypt keyfile
+   --help, <span class="token parameter variable">-h</span>       show <span class="token builtin class-name">help</span> <span class="token punctuation">(</span>default: <span class="token boolean">false</span><span class="token punctuation">)</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Example</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token assign-left variable">MEFS_PATH</span><span class="token operator">=~</span>/.memo-provider ./mefs-provider init   <span class="token parameter variable">--setPass</span><span class="token operator">=</span>true
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>The example sets the root directory of the node to: ~/.memo-provider</p>
+<h3 id="_2-2-daemon" tabindex="-1"><a class="header-anchor" href="#_2-2-daemon" aria-hidden="true">#</a> 2.2 daemon</h3>
+<p>Introduction</p>
+<p>The command is used to start and stop an provider-Node</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider daemon start <span class="token parameter variable">-h</span>
+
+COMMANDS:
+   start    Start a running mefs daemon
+   stop     Stop a running mefs daemon
+   help, h  Shows a list of commands or <span class="token builtin class-name">help</span> <span class="token keyword">for</span> one <span class="token builtin class-name">command</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Options</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token parameter variable">--password</span> value, <span class="token parameter variable">--pwd</span> value Use the password when registering <span class="token punctuation">(</span>default: memoriae<span class="token punctuation">)</span> 
+<span class="token parameter variable">--api</span> value Set the api address to use <span class="token punctuation">(</span>default: /ip4/127.0.0.1/tcp/5001<span class="token punctuation">)</span> 
+<span class="token parameter variable">--secretKey</span> value, <span class="token parameter variable">--sk</span> value Use the private key to create the node, <span class="token keyword">if</span> not, please initialize the <span class="token function">node</span> 
+--swarm-port value Set the swarm port to be used by the <span class="token function">node</span> <span class="token punctuation">(</span>default: <span class="token number">4001</span><span class="token punctuation">)</span> 
+<span class="token parameter variable">--group</span> value Set the group the <span class="token function">node</span> will enter <span class="token punctuation">(</span>default: <span class="token number">0</span> <span class="token punctuation">)</span> 
+<span class="token parameter variable">--price</span> value <span class="token builtin class-name">set</span> the price <span class="token punctuation">(</span>default: <span class="token number">0</span>, means not modify the price <span class="token keyword">in</span> config.json<span class="token punctuation">)</span> 
+<span class="token parameter variable">--secureAPI</span> Whether it is a secure API <span class="token punctuation">(</span>default: <span class="token boolean">true</span><span class="token punctuation">)</span> 
+--help, <span class="token parameter variable">-h</span> View <span class="token function">more</span> <span class="token builtin class-name">help</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Example</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token assign-left variable">MEFS_PATH</span><span class="token operator">=~</span>/.memo-provider <span class="token function">nohup</span> ./mefs-provider daemon start <span class="token parameter variable">--api</span><span class="token operator">=</span>/ip4/127.0.0.1/tcp/5001 --swarm-port<span class="token operator">=</span><span class="token number">4001</span> <span class="token parameter variable">--group</span><span class="token operator">=</span><span class="token number">1</span> <span class="token operator">&amp;></span> provider.log <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3 id="_2-3-wallet" tabindex="-1"><a class="header-anchor" href="#_2-3-wallet" aria-hidden="true">#</a> 2.3 wallet</h3>
+<p>Introduction</p>
+<p>This command implements the related functions of operating the wallet.</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider wallet <span class="token parameter variable">-h</span>
+
+COMMANDS:
+   new      create a new wallet address
+   list     list all addrs
+   default  print default wallet address
+   <span class="token builtin class-name">export</span>   <span class="token builtin class-name">export</span> wallet secret key
+   help, h  Shows a list of commands or <span class="token builtin class-name">help</span> <span class="token keyword">for</span> one <span class="token builtin class-name">command</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Subcommands</p>
+<h4 id="_2-3-1-wallet-new" tabindex="-1"><a class="header-anchor" href="#_2-3-1-wallet-new" aria-hidden="true">#</a> 2.3.1 wallet new</h4>
+<p>Introduction</p>
+<p>Create a new wallet address</p>
+<h4 id="_2-3-2-wallet-list" tabindex="-1"><a class="header-anchor" href="#_2-3-2-wallet-list" aria-hidden="true">#</a> 2.3.2 wallet list</h4>
+<p>Introduction</p>
+<p>View all wallet addresses default Display</p>
+<h4 id="_2-3-3-wallet-default" tabindex="-1"><a class="header-anchor" href="#_2-3-3-wallet-default" aria-hidden="true">#</a> 2.3.3 wallet default</h4>
+<p>Introduction</p>
+<p>View the default wallet address</p>
+<p>Example</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider wallet default
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h4 id="_2-3-4-wallet-export" tabindex="-1"><a class="header-anchor" href="#_2-3-4-wallet-export" aria-hidden="true">#</a> 2.3.4 wallet export</h4>
+<p>Introduction</p>
+<p>Export the wallet's private key</p>
+<p>Example</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider wallet <span class="token builtin class-name">export</span> wallet-address
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>Parameter wallet-address is the wallet address of the node.</p>
+<h3 id="_2-4-config" tabindex="-1"><a class="header-anchor" href="#_2-4-config" aria-hidden="true">#</a> 2.4 config</h3>
+<p>Introduction</p>
+<p>This command is used to modify the configuration file, which takes effect only when the node is not started; if the config is modified while the node is running, the node needs to be restarted to make it take effect;</p>
+<p>The path where the configuration file is located: config.json in the root directory of the node which is specified when init the node.</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider config <span class="token parameter variable">-h</span>
+
+COMMANDS:
+   <span class="token builtin class-name">set</span>      Set config key
+   get      Get config key
+   help, h  Shows a list of commands or <span class="token builtin class-name">help</span> <span class="token keyword">for</span> one <span class="token builtin class-name">command</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Subcommands</p>
+<h4 id="_2-4-1-config-set" tabindex="-1"><a class="header-anchor" href="#_2-4-1-config-set" aria-hidden="true">#</a> 2.4.1 config set</h4>
+<p>Introduction</p>
+<p>The set subcommand is used to set the value of the specified option in the configuration file</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider config <span class="token builtin class-name">set</span> <span class="token parameter variable">-h</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>Options</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token parameter variable">--key</span> value The key of the config entry <span class="token punctuation">(</span>eg <span class="token string">"api.address"</span><span class="token punctuation">)</span> 
+<span class="token parameter variable">--value</span> value The value with <span class="token function">which</span> to <span class="token builtin class-name">set</span> the config entry 
+--help, <span class="token parameter variable">-h</span> show <span class="token builtin class-name">help</span> <span class="token punctuation">(</span>default: <span class="token boolean">false</span><span class="token punctuation">)</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Example</p>
+<p>Configure the value of contract.endPoint</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider config <span class="token builtin class-name">set</span> <span class="token parameter variable">--key</span><span class="token operator">=</span>contract.endPoint <span class="token parameter variable">--value</span><span class="token operator">=</span><span class="token string">"https://testchain.metamemo.one:24180"</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h4 id="_2-4-2-config-get" tabindex="-1"><a class="header-anchor" href="#_2-4-2-config-get" aria-hidden="true">#</a> 2.4.2 config get</h4>
+<p>Introduction</p>
+<p>This command is used to get the value of the specified configuration item</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider config get <span class="token parameter variable">-h</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>Example</p>
+<p>Get the contract.endPoint value</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider config get <span class="token parameter variable">--key</span><span class="token operator">=</span>contract.endPoint
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3 id="_2-5-bootstrap" tabindex="-1"><a class="header-anchor" href="#_2-5-bootstrap" aria-hidden="true">#</a> 2.5 bootstrap</h3>
+<p>Introduction</p>
+<p>This command is used to set the bootstrap node in the configuration file, multiple bootstrap nodes can be added.</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider bootstrap <span class="token parameter variable">-h</span>
+
+COMMANDS:
+   list     list bootstrap addresses
+   <span class="token function">add</span>      <span class="token function">add</span> bootstrap addresses
+   <span class="token function">clear</span>    remove all bootstrap addresses
+   help, h  Shows a list of commands or <span class="token builtin class-name">help</span> <span class="token keyword">for</span> one <span class="token builtin class-name">command</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Subcommands</p>
+<h4 id="_2-5-1-list" tabindex="-1"><a class="header-anchor" href="#_2-5-1-list" aria-hidden="true">#</a> 2.5.1 list</h4>
+<p>Introduction</p>
+<p>View the current node bootstrap node list</p>
+<h4 id="_2-5-2-add" tabindex="-1"><a class="header-anchor" href="#_2-5-2-add" aria-hidden="true">#</a> 2.5.2 add</h4>
+<p>Introduction</p>
+<p>Add a bootstrap node</p>
+<p>Example</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider bootstrap <span class="token function">add</span> <span class="token string">"/ip4/103.xx.xx.xx/tcp/44006/p2p/12D3KooWQgakkyTFzcMh8JVbNK3FtiwJZz264sStq8QKBTeHwR3D"</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h4 id="_2-5-3-clear" tabindex="-1"><a class="header-anchor" href="#_2-5-3-clear" aria-hidden="true">#</a> 2.5.3 clear</h4>
+<p>Introduction</p>
+<p>clear the bootstrap node</p>
+<h2 id="_3-status-view-related-commands" tabindex="-1"><a class="header-anchor" href="#_3-status-view-related-commands" aria-hidden="true">#</a> 3 Status View Related Commands</h2>
+<h3 id="_3-1-net" tabindex="-1"><a class="header-anchor" href="#_3-1-net" aria-hidden="true">#</a> 3.1 net</h3>
+<p>Introduction</p>
+<p>Network related commands</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>./mefs-provider net <span class="token parameter variable">-h</span>
+
+COMMANDS:
+   info      get net info
+   connect   connet a peer
+   peers     print peers
+   findpeer  <span class="token function">find</span> peers
+   <span class="token builtin class-name">declare</span>   <span class="token builtin class-name">declare</span> public network address
+   help, h   Shows a list of commands or <span class="token builtin class-name">help</span> <span class="token keyword">for</span> one <span class="token builtin class-name">command</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Subcommands</p>
+<h4 id="_3-1-1-info" tabindex="-1"><a class="header-anchor" href="#_3-1-1-info" aria-hidden="true">#</a> 3.1.1 info</h4>
+<p>Introduction</p>
+<p>This command checks node network information</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider info <span class="token parameter variable">-h</span>
+
+USAGE:
+   mefs-provider info <span class="token builtin class-name">command</span> <span class="token punctuation">[</span>command options<span class="token punctuation">]</span> <span class="token punctuation">[</span>arguments<span class="token punctuation">..</span>.<span class="token punctuation">]</span>
+
+COMMANDS:
+   self     print <span class="token function">node</span> <span class="token function">id</span>
+   help, h  Shows a list of commands or <span class="token builtin class-name">help</span> <span class="token keyword">for</span> one <span class="token builtin class-name">command</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Example</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider net info 
+
+Network ID 12D3K<span class="token punctuation">..</span>., IP <span class="token punctuation">[</span>/ip4/172.xx.xx.xx/tcp/4001 /ip4/128.xx.xx.xx/tcp/39525 /ip4/10.xx.xx.xx/tcp/39525<span class="token punctuation">]</span>, Type: Private
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>'12D3K...' here is the peerID of this node.</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider net info self
+
+ID:  <span class="token number">26</span> provider <span class="token number">2</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="_3-1-2-peers" tabindex="-1"><a class="header-anchor" href="#_3-1-2-peers" aria-hidden="true">#</a> 3.1.2 peers</h4>
+<p>Introduction</p>
+<p>Show the network information of all nodes currently connected.</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider net peers
+
+12D3KooWHXmKSneyGqE8fPrTmNTBs2rR9pWTdNcgVG3Tt5htJef7 <span class="token punctuation">[</span>/ip4/121.xx.xx.xx/tcp/23456<span class="token punctuation">]</span>
+12D3KooWB5yMrUL6NG6wHrdR9V114mUDkpJ5Mp3c1sLPHwiFi6DN <span class="token punctuation">[</span>/ip4/192.xx.xx.xx/tcp/4201<span class="token punctuation">]</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="_3-1-3-connect" tabindex="-1"><a class="header-anchor" href="#_3-1-3-connect" aria-hidden="true">#</a> 3.1.3 connect</h4>
+<p>Introduction</p>
+<p>This command connects to a specified node manually.</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider net connect <span class="token parameter variable">-h</span>
+
+USAGE:
+   mefs-provider net connect <span class="token punctuation">[</span>command options<span class="token punctuation">]</span> <span class="token punctuation">[</span>peer multiaddr <span class="token punctuation">(</span>/ip4/1.2.3.4/tcp/5678/p2p/12D<span class="token punctuation">..</span>.<span class="token punctuation">)</span><span class="token punctuation">]</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Note</p>
+<p>About how to construction the multiaddr for a node.</p>
+<p>First use the net info command to view the network information of the node.</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>./mefs-provider net info
+Network ID 12D3K<span class="token punctuation">..</span>., IP <span class="token punctuation">[</span>/ip4/1.2.3.4/tcp/5678/<span class="token punctuation">]</span>, Type: Private
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>And the multiaddr of this node is:</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>/ip4/1.2.3.4/tcp/5678/p2p/12D3K<span class="token punctuation">..</span>.
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h4 id="_3-1-4-findpeer" tabindex="-1"><a class="header-anchor" href="#_3-1-4-findpeer" aria-hidden="true">#</a> 3.1.4 findpeer</h4>
+<p>Introduction</p>
+<p>View node information according to peerID, command usage:</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider net findpeer <span class="token parameter variable">-h</span>
+
+USAGE:
+   mefs-provider net findpeer <span class="token punctuation">[</span>command options<span class="token punctuation">]</span> <span class="token punctuation">[</span>peerID <span class="token punctuation">(</span>12D<span class="token punctuation">..</span>.<span class="token punctuation">)</span><span class="token punctuation">]</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Example</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider net findpeer 12D3KooW<span class="token punctuation">..</span>.
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h4 id="_3-1-5-declare" tabindex="-1"><a class="header-anchor" href="#_3-1-5-declare" aria-hidden="true">#</a> 3.1.5 declare</h4>
+<p>Introduction</p>
+<p>Used for the provider node to declare its own public network ip address; (only the provider node needs to use this command)</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>./mefs-provider net <span class="token builtin class-name">declare</span> <span class="token parameter variable">-h</span>
+
+NAME:
+   mefs-provider net <span class="token builtin class-name">declare</span> - <span class="token builtin class-name">declare</span> public network address
+
+USAGE:
+   mefs-provider net <span class="token builtin class-name">declare</span> <span class="token punctuation">[</span>command options<span class="token punctuation">]</span> <span class="token punctuation">[</span>net address <span class="token punctuation">(</span>/ip4/1.2.3.4/tcp/5678<span class="token punctuation">)</span><span class="token punctuation">]</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3-2-state" tabindex="-1"><a class="header-anchor" href="#_3-2-state" aria-hidden="true">#</a> 3.2 state</h3>
+<p>Introduction</p>
+<p>This command interacts with state db to obtain pay and penalty information about this node, or settle current income of this node.</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider state <span class="token parameter variable">-h</span>
+
+COMMANDS:
+   post      list post
+   pay       list pay
+   withdraw  provider income of storing data
+   help, h   Shows a list of commands or <span class="token builtin class-name">help</span> <span class="token keyword">for</span> one <span class="token builtin class-name">command</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Subcommands</p>
+<h4 id="_3-2-1-post" tabindex="-1"><a class="header-anchor" href="#_3-2-1-post" aria-hidden="true">#</a> 3.2.1 post</h4>
+<p>This command is used to read from state db to show the payment and penalty information of storage orders between user and provider nodes.</p>
+<h4 id="_3-2-2-pay" tabindex="-1"><a class="header-anchor" href="#_3-2-2-pay" aria-hidden="true">#</a> 3.2.2 pay</h4>
+<p>This command is used to read from state db to show the current balance in fs and in memo token.</p>
+<h4 id="_3-2-3-withdraw" tabindex="-1"><a class="header-anchor" href="#_3-2-3-withdraw" aria-hidden="true">#</a> 3.2.3 withdraw</h4>
+<p>This command is used for provider nodes to settle the current storage income.</p>
+<h3 id="_3-3-role" tabindex="-1"><a class="header-anchor" href="#_3-3-role" aria-hidden="true">#</a> 3.3 role</h3>
+<p>Introduction</p>
+<p>View commands for connected nodes</p>
+<h4 id="_3-3-1-list" tabindex="-1"><a class="header-anchor" href="#_3-3-1-list" aria-hidden="true">#</a> 3.3.1 list</h4>
+<p>Introduction</p>
+<p>This command is used to list connected roles</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider role list
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h4 id="_3-4-info" tabindex="-1"><a class="header-anchor" href="#_3-4-info" aria-hidden="true">#</a> 3.4 info</h4>
+<p>Introduction</p>
+<p>This command checks the basic information of this node</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider info <span class="token parameter variable">-h</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>Options</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>​--update <span class="token punctuation">(</span>default: <span class="token boolean">false</span><span class="token punctuation">)</span> 
+<span class="token parameter variable">--all</span> value, <span class="token parameter variable">-a</span> value Display all info information of the <span class="token function">node</span> <span class="token punctuation">(</span>default: <span class="token string">"false"</span><span class="token punctuation">)</span> 
+--help, <span class="token parameter variable">-h</span> View <span class="token function">more</span> <span class="token builtin class-name">help</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Example</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider info
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>or</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider info <span class="token parameter variable">-all</span> <span class="token boolean">true</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3 id="_3-5-settle" tabindex="-1"><a class="header-anchor" href="#_3-5-settle" aria-hidden="true">#</a> 3.5 settle</h3>
+<p>Introduction</p>
+<p>Node pledge, withdrawal and other operations.</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider settle <span class="token parameter variable">-h</span>
+
+COMMANDS:
+   setDesc               Set description <span class="token keyword">for</span> a node. Especially <span class="token keyword">for</span> providers, <span class="token keyword">if</span> desc is <span class="token builtin class-name">set</span> to <span class="token string">'cloud'</span>, they will be selected as <span class="token function">dc</span> <span class="token keyword">in</span> buckets preferentially.
+   withdraw              withdraw memo from fs
+   pledgeAdd             <span class="token function">add</span> pledge value
+   pledgeGet             get pledge information
+   pledgeWithdraw        move pledge value to fs, <span class="token keyword">then</span> call settle withdraw
+   pledgeRewardWithdraw  move pledge reward value to fs, <span class="token keyword">then</span> call settle withdraw
+   quitRole              change its state to inactive, this <span class="token function">op</span> is invocatable and daemon will fail at next start
+   alterPayee            alter current payee to a new one, need to be comfirmed by new payee to finish.
+   help, h               Shows a list of commands or <span class="token builtin class-name">help</span> <span class="token keyword">for</span> one <span class="token builtin class-name">command</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Subcommands</p>
+<p>Note</p>
+<p>About parameter 'amount' in subcommands</p>
+<p>Quotes should be used for the amount parameter, and there must be a space between the amount and the unit. The unit is not case-sensitive. It can be Memo, NanoMemo, AttoMemo. The relationship between them is: 1 Memo=10^9 NanoMemo=10 ^ 18 AttoMemo</p>
+<h4 id="_3-5-1-setdesc" tabindex="-1"><a class="header-anchor" href="#_3-5-1-setdesc" aria-hidden="true">#</a> 3.5.1 setDesc</h4>
+<p>Introduction</p>
+<p>Used to set the description for a node.</p>
+<h4 id="_3-5-2-pledgeadd" tabindex="-1"><a class="header-anchor" href="#_3-5-2-pledgeadd" aria-hidden="true">#</a> 3.5.2 pledgeAdd</h4>
+<p>Introduction</p>
+<p>Used to pledge some Memo for this node. Efficiant amount of Memo in wallet is required.</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>USAGE:
+   mefs-provider settle pledgeAdd <span class="token punctuation">[</span>command options<span class="token punctuation">]</span> <span class="token punctuation">[</span>amount <span class="token punctuation">(</span>Memo / NanoMemo / AttoMemo<span class="token punctuation">)</span> required<span class="token punctuation">]</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>Example</p>
+<p>To pledge 1 Memo for this node.</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider settle pledgeAdd <span class="token string">"1 Memo"</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h4 id="_3-5-3-pledgeget" tabindex="-1"><a class="header-anchor" href="#_3-5-3-pledgeget" aria-hidden="true">#</a> 3.5.3 pledgeGet</h4>
+<p>Introduction</p>
+<p>View the current pledge amount.</p>
+<p>Example</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider settle pledgeGet
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h4 id="_3-5-4-pledgewithdraw" tabindex="-1"><a class="header-anchor" href="#_3-5-4-pledgewithdraw" aria-hidden="true">#</a> 3.5.4 pledgeWithdraw</h4>
+<p>Introducton</p>
+<p>Take out some pledged Memo from pledge balance to fs balance.</p>
+<p>Example</p>
+<p>Withdraw the pledge of 0.5 Memo to the Fs account</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider settle pledgeWithdraw <span class="token string">"0.5 Memo"</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h4 id="_3-5-5-pledgerewardwithdraw" tabindex="-1"><a class="header-anchor" href="#_3-5-5-pledgerewardwithdraw" aria-hidden="true">#</a> 3.5.5 pledgeRewardWithdraw</h4>
+<p>Introduction</p>
+<p>pledgeRewardWithdraw Withdraw the pledge income to the FS file system.</p>
+<p>Example</p>
+<p>Withdraw 0.5Memo of pledge reward to Fs account</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider settle pledgeRewardWithdraw <span class="token string">"0.5 Memo"</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h4 id="_3-5-6-withdraw" tabindex="-1"><a class="header-anchor" href="#_3-5-6-withdraw" aria-hidden="true">#</a> 3.5.6 withdraw</h4>
+<p>Introduction</p>
+<p>withdraw Take out the token of the file system to the (Erc20) wallet</p>
+<p>Example</p>
+<p>Take out 0.5memo of the Fs file system to the (Erc20) wallet</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider settle withdraw <span class="token string">"0.5 Memo"</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h4 id="_3-5-7-quitrole" tabindex="-1"><a class="header-anchor" href="#_3-5-7-quitrole" aria-hidden="true">#</a> 3.5.7 quitRole</h4>
+<p>Introduction</p>
+<p>This command makes the node exit the current role. Wallet address and the balance in it is not effected.</p>
+<p>Caution</p>
+<p>Role-related functions will no longer be available at this time. However, the wallet balance will not be affected.
+For providers and keepers, the role pledge amount provided when registering the role can be withdrawn after run quitRole.</p>
+<p>Example</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider settle quitRole --really-do-it
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h4 id="_3-5-8-alterpayee" tabindex="-1"><a class="header-anchor" href="#_3-5-8-alterpayee" aria-hidden="true">#</a> 3.5.8 alterPayee</h4>
+<p>Introduction</p>
+<p>alterPayee used to change the current payee.</p>
+<h3 id="_3-6-version" tabindex="-1"><a class="header-anchor" href="#_3-6-version" aria-hidden="true">#</a> 3.6 version</h3>
+<p>Introduction</p>
+<p>View current node version</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider version
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3 id="_3-7-order" tabindex="-1"><a class="header-anchor" href="#_3-7-order" aria-hidden="true">#</a> 3.7 order</h3>
+<p>Introduction</p>
+<p>View order related information</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider order
+
+COMMANDS:
+   jobList  list <span class="token function">jobs</span> of all pros
+   payList  list pay infos all pros
+   get      get order info of one provider
+   detail   get detail order <span class="token function">seq</span> info of one provider
+   proList  list all pros
+   help, h  Shows a list of commands or <span class="token builtin class-name">help</span> <span class="token keyword">for</span> one <span class="token builtin class-name">command</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Subcommands</p>
+<h4 id="_3-7-1-list" tabindex="-1"><a class="header-anchor" href="#_3-7-1-list" aria-hidden="true">#</a> 3.7.1 list</h4>
+<p>Introductoion</p>
+<p>List all users who has data stored in this provider.</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider order list
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h4 id="_3-7-2-paylist" tabindex="-1"><a class="header-anchor" href="#_3-7-2-paylist" aria-hidden="true">#</a> 3.7.2 payList</h4>
+<p>Introductoion</p>
+<p>List all order status with provider nodes</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider order payList
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h2 id="_4-provider-daily-used-commands" tabindex="-1"><a class="header-anchor" href="#_4-provider-daily-used-commands" aria-hidden="true">#</a> 4 provider daily used commands</h2>
+<h3 id="_4-1-recover" tabindex="-1"><a class="header-anchor" href="#_4-1-recover" aria-hidden="true">#</a> 4.1 recover</h3>
+<p>Introduction</p>
+<p>It is used to repair the db as much as possible when the node starts abnormally. Warning: Do not exit the node abnormally. When you want to exit the node, you should use the daemon stop command to exit normally. Failure to do so may result in db corruption beyond repair</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider recover db <span class="token parameter variable">-h</span>
+<span class="token parameter variable">--path</span> specifies the database path to repair <span class="token parameter variable">--deType</span> the <span class="token builtin class-name">type</span> of repair data <span class="token punctuation">(</span>meta or state<span class="token punctuation">)</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>Example</p>
+<p>Repair state database</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider recover db <span class="token parameter variable">--path</span><span class="token operator">=</span>/root/.memo-provider/state <span class="token parameter variable">--dbType</span><span class="token operator">=</span>state
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3 id="_4-2-backup" tabindex="-1"><a class="header-anchor" href="#_4-2-backup" aria-hidden="true">#</a> 4.2 backup</h3>
+<p>Introduction</p>
+<p>Used when the node is down. Import/export state (or meta) database.</p>
+<p>Subcommands</p>
+<h4 id="_4-2-1-export" tabindex="-1"><a class="header-anchor" href="#_4-2-1-export" aria-hidden="true">#</a> 4.2.1 export</h4>
+<p>Introduction</p>
+<p>Export the state database to a file, using the following method:</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider backup <span class="token builtin class-name">export</span> <span class="token parameter variable">-h</span>
+
+USAGE:
+   mefs-provider backup <span class="token builtin class-name">export</span> <span class="token punctuation">[</span>command options<span class="token punctuation">]</span> <span class="token punctuation">[</span>arguments<span class="token punctuation">..</span>.<span class="token punctuation">]</span>
+
+OPTIONS:
+   <span class="token parameter variable">--path</span> value    path to store
+   <span class="token parameter variable">--dbType</span> value  <span class="token builtin class-name">export</span> dbtype: meta or state <span class="token punctuation">(</span>default: <span class="token string">"state"</span><span class="token punctuation">)</span>
+   --help, <span class="token parameter variable">-h</span>      show <span class="token builtin class-name">help</span> <span class="token punctuation">(</span>default: <span class="token boolean">false</span><span class="token punctuation">)</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Example</p>
+<p>Export the state database to the current directory</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider backup <span class="token builtin class-name">export</span> <span class="token parameter variable">--path</span><span class="token operator">=</span>./ <span class="token parameter variable">--dbType</span><span class="token operator">=</span>state
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h4 id="_4-2-2-import" tabindex="-1"><a class="header-anchor" href="#_4-2-2-import" aria-hidden="true">#</a> 4.2.2 import</h4>
+<p>Introduciton</p>
+<p>To import a database from a file, use the following method:</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider backup <span class="token function">import</span> <span class="token parameter variable">-h</span>
+
+USAGE:
+   mefs-provider backup <span class="token function">import</span> <span class="token punctuation">[</span>command options<span class="token punctuation">]</span> <span class="token punctuation">[</span>arguments<span class="token punctuation">..</span>.<span class="token punctuation">]</span>
+
+OPTIONS:
+   <span class="token parameter variable">--path</span> value    path of <span class="token function">file</span> <span class="token function">import</span> from
+   <span class="token parameter variable">--dbType</span> value  <span class="token builtin class-name">export</span> dbtype: meta or state <span class="token punctuation">(</span>default: <span class="token string">"state"</span><span class="token punctuation">)</span>
+   --help, <span class="token parameter variable">-h</span>      show <span class="token builtin class-name">help</span> <span class="token punctuation">(</span>default: <span class="token boolean">false</span><span class="token punctuation">)</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Example</p>
+<p>import state database</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider backup <span class="token function">import</span> <span class="token parameter variable">--path</span><span class="token operator">=</span>./state-xxxxxxxxx.db <span class="token parameter variable">--dbType</span><span class="token operator">=</span>state
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3 id="_4-3-restrict" tabindex="-1"><a class="header-anchor" href="#_4-3-restrict" aria-hidden="true">#</a> 4.3 restrict</h3>
+<p>Introduction</p>
+<p>The provider node sets the whitelist function. When creating a bucket, the nodes in the whitelist are given priority.</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider restrict <span class="token parameter variable">-h</span>
+
+USAGE:
+   mefs-provider restrict <span class="token builtin class-name">command</span> <span class="token punctuation">[</span>command options<span class="token punctuation">]</span> <span class="token punctuation">[</span>arguments<span class="token punctuation">..</span>.<span class="token punctuation">]</span>
+
+COMMANDS:
+   list     list all accepted providers/providers
+   <span class="token function">add</span>      <span class="token function">add</span> node<span class="token punctuation">(</span>s<span class="token punctuation">)</span> to restrict list
+   delete   remove node<span class="token punctuation">(</span>s<span class="token punctuation">)</span> from restrict list
+   has      <span class="token builtin class-name">test</span> whether node<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token keyword">in</span> restrict list
+   <span class="token builtin class-name">set</span>      enable/disable restrict
+   <span class="token function">stat</span>     restrict stat<span class="token punctuation">(</span>enable/disable<span class="token punctuation">)</span>
+   help, h  Shows a list of commands or <span class="token builtin class-name">help</span> <span class="token keyword">for</span> one <span class="token builtin class-name">command</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Subcommands</p>
+<h4 id="_4-3-1-list" tabindex="-1"><a class="header-anchor" href="#_4-3-1-list" aria-hidden="true">#</a> 4.3.1 list</h4>
+<p>Introduction</p>
+<p>View whitelist node</p>
+<p>Example</p>
+<p>View the nodes in the whitelist</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider restrict list
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h4 id="_4-3-2-add" tabindex="-1"><a class="header-anchor" href="#_4-3-2-add" aria-hidden="true">#</a> 4.3.2 add</h4>
+<p>Introduction</p>
+<p>Add whitelist node</p>
+<p>Example</p>
+<p>Add provider node to whitelist</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider restrict <span class="token function">add</span> PID
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>The parameter PID is the provider node ID to be added to the whitelist</p>
+<h4 id="_4-3-3-delete" tabindex="-1"><a class="header-anchor" href="#_4-3-3-delete" aria-hidden="true">#</a> 4.3.3 delete</h4>
+<p>Introduction</p>
+<p>delete whitelist node</p>
+<p>Example</p>
+<p>Delete whitelist nodes</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider restrict delete PID
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>The parameter PID is the provider node ID to be added to the whitelist</p>
+<h4 id="_4-3-4-has" tabindex="-1"><a class="header-anchor" href="#_4-3-4-has" aria-hidden="true">#</a> 4.3.4 has</h4>
+<p>Introduction</p>
+<p>Check whether the node is in the whitelist</p>
+<p>Example</p>
+<p>Check whether the node is in the current whitelist</p>
+<p>mefs-provider restrict has PID
+The parameter PID is the provider node ID to be added to the whitelist</p>
+<h4 id="_4-3-5-set" tabindex="-1"><a class="header-anchor" href="#_4-3-5-set" aria-hidden="true">#</a> 4.3.5 set</h4>
+<p>Introduction</p>
+<p>Set whitelist status</p>
+<p>Example</p>
+<p>Enable the whitelist function</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider restrict <span class="token builtin class-name">set</span> <span class="token parameter variable">--enable</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>Turn off the whitelist function</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider restrict <span class="token builtin class-name">set</span> disable
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h4 id="_4-3-6-stat" tabindex="-1"><a class="header-anchor" href="#_4-3-6-stat" aria-hidden="true">#</a> 4.3.6 stat</h4>
+<p>Introduction</p>
+<p>Check whitelist status</p>
+<p>Example</p>
+<p>Check whitelist status</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider restrict <span class="token function">stat</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h2 id="_5-other-commands" tabindex="-1"><a class="header-anchor" href="#_5-other-commands" aria-hidden="true">#</a> 5 Other commands</h2>
+<h3 id="_5-1-auth" tabindex="-1"><a class="header-anchor" href="#_5-1-auth" aria-hidden="true">#</a> 5.1 auth</h3>
+<p>Introduction</p>
+<p>Query the value of the token file of the node. The token file is located in the root directory of the node. Ordinary providers do not need to pay attention to this value.</p>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider auth info <span class="token parameter variable">-h</span>
+
+USAGE:
+   mefs-provider restrict <span class="token builtin class-name">command</span> <span class="token punctuation">[</span>command options<span class="token punctuation">]</span> <span class="token punctuation">[</span>arguments<span class="token punctuation">..</span>.<span class="token punctuation">]</span>
+
+COMMANDS:
+   list     list all accepted providers/providers
+   <span class="token function">add</span>      <span class="token function">add</span> node<span class="token punctuation">(</span>s<span class="token punctuation">)</span> to restrict list
+   delete   remove node<span class="token punctuation">(</span>s<span class="token punctuation">)</span> from restrict list
+   has      <span class="token builtin class-name">test</span> whether node<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token keyword">in</span> restrict list
+   <span class="token builtin class-name">set</span>      enable/disable restrict
+   <span class="token function">stat</span>     restrict stat<span class="token punctuation">(</span>enable/disable<span class="token punctuation">)</span>
+   help, h  Shows a list of commands or <span class="token builtin class-name">help</span> <span class="token keyword">for</span> one <span class="token builtin class-name">command</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_5-2-log-command" tabindex="-1"><a class="header-anchor" href="#_5-2-log-command" aria-hidden="true">#</a> 5.2 log command</h3>
+<p>Introduction</p>
+<p>This command is used to set the log level. Different levels display log information of different alarm levels. The default is info level, which only displays normal status information. Ordinary providers should use info log level. The debug/warn/error level is used by developers to view detailed error logs. This level will generate a large number of logs and cannot be in debug mode for a long time, otherwise it will take up a lot of disk space. It is not recommended for ordinary providers to use.</p>
+<p>Subcommands</p>
+<h4 id="_5-2-1-setlevel" tabindex="-1"><a class="header-anchor" href="#_5-2-1-setlevel" aria-hidden="true">#</a> 5.2.1 setLevel</h4>
+<p>Usage</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider log setLevel <span class="token parameter variable">-h</span>
+
+NAME:
+   mefs-provider log setLevel - Set log level
+
+USAGE:
+   mefs-provider log setLevel <span class="token punctuation">[</span>command options<span class="token punctuation">]</span> <span class="token punctuation">[</span>level <span class="token punctuation">(</span>debug/info/warn/error<span class="token punctuation">)</span><span class="token punctuation">]</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Example</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code>mefs-provider log setLevel debug
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div></div></template>
+
+
